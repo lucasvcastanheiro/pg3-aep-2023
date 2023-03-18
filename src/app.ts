@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import routes from './routes/routes'
+import errorHandler from './middlewares/errorHandler'
 
 class App {
     public express: express.Application
@@ -10,6 +11,7 @@ class App {
 
         this.middleware()
         this.routes()
+        this.express.use(errorHandler)
         // this.database()
     }
 
