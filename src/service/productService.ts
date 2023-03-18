@@ -6,11 +6,26 @@ class ProductService {
     }
 
     public async getProducts() {
-        let products = await fs.readFile('products.json', {encoding: 'utf-8'})
+        let fileData = await fs.readFile('products.json', {encoding: 'utf-8'})
         
-        products = JSON.parse(products)
+        const products = JSON.parse(fileData)
 
         return products
+    }
+
+    public async getStock() {
+        const products = await this.getProducts()
+
+        const stock = products.map((product: any) => {
+            return {
+                name: product.nome,
+                amount: product.qtde,
+                price: product.preco,
+                stockValue: product.qtde * product.preco
+            }
+        })
+        
+        return stock
     }
 }
 

@@ -23,6 +23,16 @@ class ProductController {
             next(error)            
         }
     }
+
+    public async getStock(req: Request, res: Response, next: NextFunction) {
+        try {
+            const stock = await productService.getStock()
+
+            res.json(stock)
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new ProductController()
