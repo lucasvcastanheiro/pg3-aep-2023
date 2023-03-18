@@ -19,4 +19,12 @@ describe('ProductService Suite Tests', () => {
         productService.createProducts(mockObj)
         expect(fs.writeFile).toBeCalledWith('products.json', writeFileData)
     })
+
+    it('should get data from a file called products.json', async () => {
+        jest.spyOn(fs, 'readFile')
+        
+        const result = await productService.getProducts()
+        expect(fs.readFile).toBeCalledWith('products.json', {encoding: 'utf-8'})
+        expect(result).toEqual(mockObj)
+    })
 })

@@ -17,4 +17,13 @@ describe('Products', () => {
 
         expect(status).toBe(201)
     })
+
+    it.only('should get data from a file called products.json', async () => {
+        const {status, body} = await request(app)
+            .get('/products')
+            .send()
+
+        // expect(status).toBe(200)
+        expect(body).toEqual(mockObj)
+    })
 })
