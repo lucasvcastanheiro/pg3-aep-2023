@@ -23,7 +23,20 @@ describe('Products', () => {
             .get('/products')
             .send()
 
-        // expect(status).toBe(200)
+        expect(status).toBe(200)
         expect(body).toEqual(mockObj)
+    })
+
+    it('should get formated data from a file called products.json', async () => {
+        const {status, body} = await request(app)
+        .get('/products/stock')
+        .send()
+
+        expect(status).toBe(200)
+        expect(Array.isArray(body)).toBe(true)
+        expect(body[0]).toHaveProperty('name')
+        expect(body[0]).toHaveProperty('amount')
+        expect(body[0]).toHaveProperty('price')
+        expect(body[0]).toHaveProperty('stockValue')
     })
 })
