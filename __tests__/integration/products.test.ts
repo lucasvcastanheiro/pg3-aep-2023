@@ -39,4 +39,13 @@ describe('Products', () => {
         expect(body[0]).toHaveProperty('price')
         expect(body[0]).toHaveProperty('stockValue')
     })
+
+    it('should get total stock value', async () => {
+        const {status, body} = await request(app)
+            .get('/products/stock/totalValue')
+            .send()
+            
+            expect(status).toBe(200)
+            expect(body).toHaveProperty('totalStockValue')
+    })
 })
