@@ -31,11 +31,9 @@ class ProductService {
     public async getTotalStockValue() {
         const stock = await this.getStock()
 
-        const totalStockValue = stock.map((product: any) => {
-            return product.stockValue
-        }).reduce((previousValue: any, currentValue: any, index: any, array: any) => {
-            return previousValue + currentValue
-        })
+        const totalStockValue = stock.reduce((previousValue: any, currentValue: any) => {
+            return previousValue + currentValue.stockValue
+        }, 0).toFixed(2)
 
         return totalStockValue
     }
